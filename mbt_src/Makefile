@@ -2,8 +2,13 @@
 # Copyright 2014-2020 NXP
 #
 
-CC=		$(CROSS_COMPILE)gcc
+COMPATDIR=/lib/modules/$(KERNELVERSION_X86)/build/compat-wireless-3.2-rc1-1/include
+ifeq ($(CC),)
+CC=		$(CROSS_COMPILE)gcc -I$(COMPATDIR)
+endif
+ifeq ($(LD),)
 LD=		$(CROSS_COMPILE)ld
+endif
 
 BACKUP=		/root/backup
 YMD=		`date +%Y%m%d%H%M`
